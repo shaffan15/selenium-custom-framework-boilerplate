@@ -3,6 +3,7 @@ package com.shaffan.base;
 import org.testng.annotations.Test;
 
 import com.shaffan.utils.ConfigReader;
+import com.shaffan.utils.DriverFactory;
 
 import io.qameta.allure.testng.AllureTestNg;
 
@@ -26,52 +27,30 @@ import org.testng.annotations.AfterMethod;
 @Listeners(AllureTestNg.class)
 public class BaseTest {
 
-	protected WebDriver driver;
 
 	@BeforeMethod
 	public void setup() {
 		
-		driver = createDriver(ConfigReader.getProperty("browserName"));
+		String browser = ConfigReader.getProperty("browser");
+		boolean isHeadless = Boolean.parseBoolean(ConfigReader.getProperty("isHeadless"));
 		
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		DriverFactory.initDriver(browser, isHeadless);
 		
-		String baseUrl = ConfigReader.getProperty("baseUrl");
-		driver.get(baseUrl);
+		getDriver().manage().window().maximize();
+		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
+		String baseUrl = ConfigReader.getProperty("url");
+		getDriver().get(baseUrl);
 	}
 
 	@Parameters("closeBrowser")
 	@AfterMethod
 	public void afterMethod(@Optional("true")String closeBrowser) {
-		if(driver != null && "true".equals(closeBrowser))
-			driver.quit();
+		if(getDriver() != null && "true".equals(closeBrowser))
+			DriverFactory.tearDown();
 	}
 	
 	public WebDriver getDriver() {
-		return driver;
+		return DriverFactory.getDriver();
 	}
-	
-	private WebDriver createDriver(String browserName) throws RuntimeException {
-		
-		switch (browserName) {
-		case "chrome":
-			if(System.getenv("isHeadless") != null) {
-				ChromeOptions options = new ChromeOptions();
-				options.addArguments("--headless=new");
-				return new ChromeDriver(options);
-			}
-			return new ChromeDriver();
-		case "firefox":
-			if(System.getenv("isHeadless") != null) {
-				FirefoxOptions options = new FirefoxOptions();
-				options.addArguments("--headless");
-				return new FirefoxDriver(options);
-			}
-			return new FirefoxDriver();
-		default:
-			break;
-		}
-		throw new RuntimeException("Invalid Browser name:");
-	}
-	
 }

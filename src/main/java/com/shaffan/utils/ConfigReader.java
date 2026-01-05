@@ -19,11 +19,16 @@ public class ConfigReader {
 
 	public static String getProperty(String key) {
 		
-		if(System.getenv(key) != null)
-			return System.getenv(key);
+//		if(System.getenv(key) != null)
+//			return System.getenv(key);
 		
-		if(System.getProperty(key) != null) 
+		String propertyValue = System.getProperty(key); 
+		
+		if(propertyValue != null && !propertyValue.isEmpty()) {
+			System.out.println("value of " + key + " is: " + System.getProperty(key));
 			return System.getProperty(key);
+		}
+			
 		
 		return properties.getProperty(key);
 	}

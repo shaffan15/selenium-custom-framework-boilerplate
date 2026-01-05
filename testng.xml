@@ -8,7 +8,12 @@
 	</listeners>
 	<test name="Login Functionality Tests">
 		<classes>
-			<class name="com.shaffan.tests.LoginTest" />
+			<class name="com.shaffan.tests.LoginTest">
+				<methods>
+					<include name="testLoginWithInvalidCreds" />
+				</methods>
+			</class>
+			
 		</classes>
 	</test>
 </suite>

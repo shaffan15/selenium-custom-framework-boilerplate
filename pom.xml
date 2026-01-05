@@ -94,12 +94,13 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
-					<environmentVariables>
+					<systemPropertyVariables>
 						<!-- This maps a Maven property to an OS environment
 						variable -->
-						<browserName>firefox</browserName>
-						<isHeadless>yes</isHeadless>
-					</environmentVariables>
+						<url>${target.url}</url>
+						<isHeadless>${target.isHeadless}</isHeadless>
+						<browser>${target.browser}</browser>
+					</systemPropertyVariables>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -121,5 +122,26 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<!-- QA Environment Profile -->
+		<profile>
+			<id>qa</id>
+			<properties>
+				<target.url>https://opensource-demo.orangehrmlive.com/web/index.php/auth/login</target.url>
+				<target.isHeadless>true</target.isHeadless>
+				<target.browser>chrome</target.browser>
+			</properties>
+		</profile>
+
+		<!-- Production Environment Profile -->
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env.db.url>jdbc:mysql://prod-db:3306/mydb</env.db.url>
+				<env.api.key>PROD_SECRET_KEY</env.api.key>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>

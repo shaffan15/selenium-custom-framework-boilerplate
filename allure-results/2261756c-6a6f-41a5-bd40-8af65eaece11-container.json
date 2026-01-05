@@ -1,1 +1,0 @@
-{"uuid":"2261756c-6a6f-41a5-bd40-8af65eaece11","name":"com.shaffan.base.BaseTest.setup","children":["c2429e1f-8b40-406b-9036-198df8bf4a3a"],"description":"","befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1767388263172,"stop":1767388268470}],"afters":[],"start":1767388263171,"stop":1767388268470}

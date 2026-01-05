@@ -22,7 +22,7 @@ public class LoginTest extends BaseTest {
 
 	LoginPage login;
 
-	@DataProvider(name = "invalidLoginData")
+	@DataProvider(name = "invalidLoginData", parallel = true)
 	public static Object[][] invalidLoginData() {
 		return ExcelUtil.getExcelData("LoginData.xlsx", "Invalid Users");
 	}
@@ -31,7 +31,7 @@ public class LoginTest extends BaseTest {
 	@Severity(SeverityLevel.BLOCKER)
 	@Story("User should not be able to login with invalid credentials")
 	public void testLoginWithInvalidCreds(String userName, String password) {
-		login = new LoginPage(driver);
+		login = new LoginPage(getDriver());
 		login.loginWith(userName, password);
 		assertThat(login.isErrorBoxDisplayed()).isTrue();
 	}
@@ -40,12 +40,12 @@ public class LoginTest extends BaseTest {
 	@Severity(SeverityLevel.BLOCKER)
 	@Story("User should be able to login with admin credentials")
 	public void testLogin() {
-		login = new LoginPage(driver);
+		login = new LoginPage(getDriver());
 		String username = ConfigReader.getProperty("username");
 		String password = ConfigReader.getProperty("password");
 		
 		login.loginWith(username, password);
 		
-		assertThat(driver.getCurrentUrl()).contains("dashboard/index");
+		assertThat(getDriver().getCurrentUrl()).contains("dashboard/index");
 	}
 }
