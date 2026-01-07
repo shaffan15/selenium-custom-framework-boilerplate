@@ -8,6 +8,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -42,4 +46,10 @@ public class BaseTest {
 	public WebDriver getDriver() {
 		return DriverFactory.getDriver();
 	}
+	
+	@Test
+	public void test() {
+		assertThat(getDriver().getCurrentUrl()).contains("google");
+	}
+	
 }

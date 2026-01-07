@@ -2,8 +2,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.shaffan.learningSelenium</groupId>
-	<artifactId>data-driven-test-practice</artifactId>
+	<groupId>com.mciver.demo</groupId>
+	<artifactId>mciver-assessment-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 
@@ -128,19 +128,13 @@
 		<profile>
 			<id>qa</id>
 			<properties>
-				<target.url>https://opensource-demo.orangehrmlive.com/web/index.php/auth/login</target.url>
+				<target.url>ENTER_YOUR_URL_HERE</target.url>
 				<target.isHeadless>true</target.isHeadless>
 			</properties>
 		</profile>
 
 		<!-- Production Environment Profile -->
-		<profile>
-			<id>prod</id>
-			<properties>
-				<env.db.url>jdbc:mysql://prod-db:3306/mydb</env.db.url>
-				<env.api.key>PROD_SECRET_KEY</env.api.key>
-			</properties>
-		</profile>
+		
 	</profiles>
 
 </project>

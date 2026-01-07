@@ -7,14 +7,9 @@
 			class-name="com.shaffan.listeners.AnnotationTransformer" />
 	</listeners>
 	
-	<test name="Login Functionality Tests">
+	<test name="General">
 		<classes>
-			<class name="com.shaffan.tests.LoginTest">
-				<methods>
-					<include name="testLogin" />
-				</methods>
-			</class>
-			
+			<class name="com.shaffan.base.BaseTest" />
 		</classes>
 	</test>
 	

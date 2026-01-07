@@ -13,9 +13,6 @@ public class BasePage {
 	protected WebDriver driver;
 	protected WaitUtil waitUtil;
 	
-	@FindBy(xpath = "//a[contains(@href, 'viewLeaveModule')]")
-	WebElement leaveModule;
-	
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -44,9 +41,4 @@ public class BasePage {
 		waitUtil.waitForVisibility(element);
 		return element.isDisplayed();
 	}
-	
-	public void gotoLeaveModule() {
-		click(leaveModule);
-	}
-	
 }
