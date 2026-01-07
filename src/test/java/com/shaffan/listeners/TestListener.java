@@ -9,16 +9,15 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import com.shaffan.base.BaseTest;
+import com.shaffan.utils.DriverFactory;
 import com.shaffan.utils.FileUtil;
+import com.shaffan.utils.Helper;
+import com.shaffan.utils.TimeUtil;
 
 import io.qameta.allure.Attachment;
 
 public class TestListener implements ITestListener {
 
-	@Attachment(value = "Page Screenshot", type = "image/png")
-	public byte[] saveScreenshotPng(WebDriver driver) {
-		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-	}
 	
 	@Override
 	public void onTestFailure(ITestResult result) {
@@ -27,10 +26,9 @@ public class TestListener implements ITestListener {
 		
 		try {
 			if(driver != null) {
+				Helper.saveScreenshotPng(result.getName() + "_FAILED_AT_" + TimeUtil.now());
 				File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-				saveScreenshotPng(driver);
-				File savedScreenshot = FileUtil.copyScreenshot(src, result.getName());
-				
+				FileUtil.copyScreenshot(src, result.getName());
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
