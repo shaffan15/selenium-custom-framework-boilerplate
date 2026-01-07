@@ -48,3 +48,18 @@ buildNumber.properties
 drivers/
 chromedriver.exe
 geckodriver.exe
+
+
+# TestNG output
+test-output/
+
+# Custom Reports
+reports/
+
+# Allure
+allure-results/
+allure-report/
+
+# Logs
+logs/
+*.log
